@@ -4,8 +4,11 @@
       <v-layout column align-center>
         <img src="@/assets/logo.png" alt="InJson" class="mb-5">
         <blockquote>
-          &#8220;Internalization using json files&#8221;
+          &#8220;Internalization using jsfghfghon files&#8221;
         </blockquote>
+        <v-content >
+        Please or create a project in the left window.
+        </v-content>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
@@ -15,9 +18,9 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

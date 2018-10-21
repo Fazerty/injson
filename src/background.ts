@@ -7,10 +7,13 @@ import {
   createProtocol,
   installVueDevtools,
 } from 'vue-cli-plugin-electron-builder/lib';
+
 const isDevelopment = process.env.NODE_ENV !== 'production';
 if (isDevelopment) {
   // Don't load any native (external) modules until the following line is run:
+  // tslint:disable
   require('module').globalPaths.push(process.env.NODE_MODULES_PATH);
+  // tslint:enable
 }
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
@@ -54,7 +57,8 @@ const template = [
 const menu = Menu.buildFromTemplate(template);
 
 function createMainWindow() {
-  const window = new BrowserWindow();
+  const window = new BrowserWindow({icon: '@/assets/favicon.ico',
+  backgroundColor: '#2e2c29', darkTheme: true, autoHideMenuBar: true, width: 1100, height: 700, frame: false});
 
   // const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu);
@@ -62,7 +66,7 @@ function createMainWindow() {
   if (isDevelopment) {
     // Load the url of the dev server if in development mode
     window.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
-    // if (!process.env.IS_TEST) window.webContents.openDevTools()
+    if (!process.env.IS_TEST) window.webContents.openDevTools()
   } else {
     createProtocol('app');
     //   Load the index.html when not in development
