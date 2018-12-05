@@ -5,7 +5,7 @@
           <ProjectList></ProjectList>
     </v-navigation-drawer>
     <v-content>
-      <HelloWorld/>
+      <router-view/>
     </v-content>
 
     <v-footer :fixed="appData.fixed" app>
@@ -17,23 +17,22 @@
 </template>
 
 <script lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
+import { Component } from 'vue-property-decorator';
 import MainToolbar from '@/components/MainToolbar.vue';
 import ProjectList from '@/components/ProjectList.vue';
-import { ExtVue } from '@/plugins/extVue';
+import Vue from 'vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld,
-    MainToolbar,
-    ProjectList,
-  },
-  data(this: ExtVue): any {
-    return {
-      appData: this.$store.state.app,
-    };
-  },
-  
-};
+@Component<App>({
+    name: 'App',
+    components: {
+        MainToolbar,
+        ProjectList
+    },
+    data(): any {
+        return {
+            appData: this.$store.state.app
+        };
+    }
+})
+export default class App extends Vue {}
 </script>

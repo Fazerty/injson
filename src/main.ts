@@ -2,15 +2,17 @@ import '@babel/polyfill';
 import Vue from 'vue';
 import './plugins/vuetify';
 import App from './App.vue';
-import router from './plugins/router';
-import store from '@/store/store';
+import router from '@/plugins/router';
+import store from '@/plugins/store/store';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import i18n from './plugins/i18n';
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
-  render: (h) => h(App),
+    router,
+    store,
+    i18n,
+    render: (h: any) => h(App)
 }).$mount('#app');
