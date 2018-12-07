@@ -79,8 +79,8 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import { mapGetters } from 'vuex';
-import router from '@/plugins/router';
-import { Project } from '@/models/project';
+import router from '@/cli/plugins/router';
+import { Project } from '@/cli/models/project';
 import Vue from 'vue';
 
 @Component<ProjectList>({
@@ -90,8 +90,6 @@ import Vue from 'vue';
 })
 export default class ProjectList extends Vue {
     private showDeleteDialog: boolean = false;
-
-    private projectToDelete: Project = new Project();
 
     private created() {
         this.$store.commit('initProjects');

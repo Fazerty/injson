@@ -1,14 +1,20 @@
 'use strict';
 
-import { app, protocol, BrowserWindow, Menu } from 'electron';
+import { app, protocol, BrowserWindow } from 'electron';
 import * as path from 'path';
 import { format as formatUrl } from 'url';
+import { ConnectionOptions, createConnection, Connection } from 'typeorm';
 import {
     createProtocol,
     installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib';
+import './services/projectService';
+import 'reflect-metadata';
+import { registerIpc } from './services/projectService';
+import { Project } from './models/project';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+
 if (isDevelopment) {
     // Don't load any native (external) modules until the following line is run:
     // tslint:disable
@@ -22,6 +28,18 @@ let mainWindow: any;
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], { secure: true });
 
+const databaseOptions: ConnectionOptions = {
+    type: 'sqlite',
+    database: 'injson.db',
+    synchronize: true,
+    migrationsRun: true,
+    logging: 'all',
+    logger: 'simple-console',
+    entities: [Project],
+    migrationsTableName: 'custom_migration',
+    migrations: ['./database/migrations/*.ts']
+};
+
 function createMainWindow() {
     const window = new BrowserWindow({
         icon: './src/assets/logo.png',
@@ -32,7 +50,6 @@ function createMainWindow() {
         height: 800,
         frame: false
     });
-
 
     if (isDevelopment) {
         // Load the url of the dev server if in development mode
@@ -81,11 +98,14 @@ app.on('activate', () => {
     }
 });
 
-// create main BrowserWindow when electron is ready
+// create db connection and main BrowserWindow when electron is ready
 app.on('ready', async () => {
     if (isDevelopment && !process.env.IS_TEST) {
         // Install Vue Devtools
         await installVueDevtools();
     }
     mainWindow = createMainWindow();
+    const connection: Connection = await createConnection(databaseOptions);
+    connection.synchronize(false);
+    registerIpc();
 });

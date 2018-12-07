@@ -1,4 +1,4 @@
-import { Project } from '@/models/project';
+import { Project } from '@/cli/models/project';
 
 export interface State {
 

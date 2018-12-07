@@ -1,0 +1,12 @@
+{
+    "type": "sqlite",
+    "database": "injson.db",
+    "synchronize": true,
+    "migrationsRun": true,
+    "logging": "all",
+    "logger": "simple-console",
+    "entities": ["./src/server/models/*.ts"],
+    "migrationsTableName": "custom_migration",
+    "migrations": [".src/server/database/migrations/*.ts"],
+    "cli": { "migrationsDir": "./src/server/database/migrations" }
+}

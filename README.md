@@ -34,3 +34,6 @@ npm run test:e2e
 ```
 npm run test:unit
 ```
+
+
+ts-node ./node_modules/.bin/typeorm migration:generate -f ormconfig.json -n First
