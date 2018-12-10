@@ -12,3 +12,5 @@ import Vue from 'vue';
 })
 export default class EditProject extends Vue {}
 </script>
+<style scoped lang="scss">
+</style>

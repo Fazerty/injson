@@ -9,10 +9,14 @@ import i18n from '@/cli/plugins/i18n';
 import store from '@/cli/plugins/store/store';
 import '@/cli/services/cliRenderers';
 import VueElectron from 'vue-electron';
+import LiquorTree from 'liquor-tree';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueElectron);
+
+// global registration
+Vue.use(LiquorTree);
 
 new Vue({
     router,

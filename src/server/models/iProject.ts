@@ -1,4 +1,10 @@
 
+/**
+ *
+ *
+ * @export
+ * @interface IProject
+ */
 export interface IProject {
     id?: number;
 
