@@ -11,7 +11,8 @@ export function initRenderers(vue: Vue) {
             PROJECT_CREATED,
             (event: any, newProject: Project) => {
                 vue.$store.commit('addProject', newProject);
-                vue.$store.commit('newMessage', 'New project created');
+                vue.$store.commit('newMessage', 'Project ' + newProject.title + ' created');
+                vue.$store.commit('selectProject', newProject.id);
             }
         );
 

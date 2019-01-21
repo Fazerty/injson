@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { State } from './state';
 import { Project } from '@/cli/models/project';
+import router from '@/cli/plugins/router';
 
 Vue.use(Vuex);
 
@@ -41,6 +42,7 @@ const mutations = {
 
     selectProject(currentState: State, id: string | undefined) {
         currentState.session.selectedProjectId = id;
+        router.push({ name: 'editProject' });
     },
 
     newMessage(currentState: State, msg: string) {
@@ -54,7 +56,7 @@ const getters = {
         return state.message;
     },
     selectedProject() {
-        state.projects.forEach((proj: any) => {
+        return state.projects.find((proj: any) => {
             if (proj.id === state.session.selectedProjectId) {
                 return proj;
             }

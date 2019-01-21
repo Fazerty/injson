@@ -14,7 +14,7 @@
             <v-list-tile-action v-if="!appData.miniVariant">
               <v-layout align-center justify-center row fill-height>
                 <v-btn icon ripple @click="deleteProjectDialog(project.id)">
-                  <v-icon small color="red">remove</v-icon>
+                  <v-icon small color="red">mdi-minus</v-icon>
                 </v-btn>
               </v-layout>
             </v-list-tile-action>
@@ -33,24 +33,12 @@
           color="grey"
           icon
           ripple
-          @click.stop="appData.miniVariant = !appData.miniVariant"
+          @click.stop="appData.drawer = !appData.drawer"
         >
-          <v-icon v-html="appData.miniVariant? 'chevron_right':  'chevron_left'"></v-icon>
+          <v-icon v-html="appData.drawer? 'mdi-chevron-double-left': 'mdi-chevron-double-right' "></v-icon>
         </v-btn>
-        <v-btn
-          v-if="!appData.miniVariant"
-          absolute
-          dark
-          fab
-          top
-          small
-          right
-          color="pink"
-          icon
-          ripple
-          @click="createProject()"
-        >
-          <v-icon>add</v-icon>
+        <v-btn absolute dark fab top small right color="pink" icon ripple @click="createProject()">
+          <v-icon>mdi-plus</v-icon>
         </v-btn>
       </v-card-text>
     </v-card>
@@ -85,17 +73,20 @@ import Vue from 'vue';
 
 @Component<ProjectList>({
     computed: {
-        ...mapGetters(['selectedProject', 'projects', 'appData'])
+        ...mapGetters(['selectedProject', 'projects'])
     }
+
 })
 export default class ProjectList extends Vue {
     private showDeleteDialog: boolean = false;
+    private appData: any = this.$store.state.app;
 
     private created() {
         this.$store.commit('initProjects');
     }
 
     private createProject() {
+        this.appData.drawer = false;
         this.$store.commit('selectProject', undefined);
         router.push({ name: 'createProject' });
     }

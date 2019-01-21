@@ -5,11 +5,11 @@ import { Project } from '@/cli/models/project';
 
 export class CliProjectService {
 
-    public create(project: Project) {
+    public static createProject(project: Project) {
         ipcRenderer.send(CREATE_PROJECT, project);
     }
 
-    public getProjects() {
+    public static getProjects() {
         ipcRenderer.send(GET_PROJECTS, undefined);
     }
 }

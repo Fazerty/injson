@@ -6,6 +6,7 @@ export class Project implements IProject {
     public title: string;
     public folder: string;
     public translationsFolder: string;
+    public translationsPaths: string = '{{lng}}/{{ns}}.json';
     public keySearchRegx: string;
     public filesFilter: string;
 

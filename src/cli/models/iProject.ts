@@ -6,6 +6,7 @@ export interface IProject {
     title: string;
     folder: string;
     translationsFolder: string;
+    translationsPaths: string;
     keySearchRegx: string;
     filesFilter: string;
 
